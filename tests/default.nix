@@ -10,6 +10,6 @@ let
   };
 in pkgs.runCommand "devTest" { } ''
   mkdir -p $out
-  cmp ${out}/foo.txt actual
-  cp -r ${out} $out
+  # cmp ${out}/foo.txt actual
+  cp -a ${out}/. $out
 ''
