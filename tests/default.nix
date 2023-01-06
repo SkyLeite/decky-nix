@@ -3,12 +3,11 @@ let
   out = lib.mkPlugin {
     meta = {
       name = "test plugin";
+      version = "1";
       author = "Sky Leite";
       description = "Doesn't really do much yet";
     };
 
-    name = "test plugin";
-    version = "1";
     pythonSource = ./demo;
   };
 in pkgs.runCommand "devTest" { } ''

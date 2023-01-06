@@ -39,8 +39,8 @@ let
     import lib
   '';
 in pkgs.stdenv.mkDerivation {
-  name = config.name;
-  version = config.version;
+  name = config.meta.name;
+  version = config.meta.version;
 
   dontUnpack = true;
   dontBuild = true;
