@@ -9,10 +9,7 @@ let
 
     name = "test plugin";
     version = "1";
-    src = ./.;
     pythonSource = ./demo;
-
-    jsLibs = [ ];
   };
 in pkgs.runCommand "devTest" { } ''
   mkdir -p $out

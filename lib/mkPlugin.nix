@@ -41,11 +41,9 @@ let
 in pkgs.stdenv.mkDerivation {
   name = config.name;
   version = config.version;
-  src = config.src;
 
-  buildInputs = [ ] ++ config.jsLibs;
-
-  buildPhase = "";
+  dontUnpack = true;
+  dontBuild = true;
 
   installPhase = ''
     mkdir -p $out/default/lib
