@@ -8,6 +8,17 @@ let
 
   pythonSourceDirName = builtins.baseNameOf config.pythonSource;
 
+  pluginJson = builtins.toFile "input.json" (builtins.toJSON {
+    name = config.meta.name;
+    author = config.meta.author;
+    flags = config.meta.flags or [ ];
+    publish = {
+      tags = config.meta.tags or [ ];
+      description = config.meta.description;
+      image = config.image or null;
+    };
+  });
+
   mainPythonFile = ''
     # From https://github.com/FrogTheFrog/moondeck/commit/c062ff90de23c0641ae2ca79f32f3f545d4a69af
     def get_plugin_dir():
@@ -34,10 +45,7 @@ in pkgs.stdenv.mkDerivation {
 
   buildInputs = [ ] ++ config.jsLibs;
 
-  buildPhase = builtins.trace config.pythonSource ''
-    echo lmao
-    echo 1 > foo.txt
-  '';
+  buildPhase = "";
 
   installPhase = ''
     mkdir -p $out/default/lib
@@ -50,5 +58,8 @@ in pkgs.stdenv.mkDerivation {
     cp ${config.pythonSource}/${pythonSourceDirName}/. -t $out/default/lib/ -a
 
     printf "${mainPythonFile}" > $out/main.py
+
+    # Write plugin.json
+    cp ${pluginJson} $out/plugin.json
   '';
 }
