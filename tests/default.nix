@@ -9,6 +9,7 @@ let
     };
 
     pythonSource = ./demo;
+    frontendPath = ./demo-front;
   };
 in pkgs.runCommand "devTest" { } ''
   mkdir -p $out

@@ -38,6 +38,17 @@ let
 
     import lib
   '';
+
+  frontend = pkgs.buildNpmPackage {
+    name = config.meta.name;
+    version = config.meta.version;
+
+    src = config.frontendPath;
+    npmDepsHash = "sha256-hi9TKcKXhfeceW2iaIIV6HbNxZv72bZ7mhR0K9QS1hI=";
+  };
+
+  frontendDirName = builtins.baseNameOf config.frontendPath;
+
 in pkgs.stdenv.mkDerivation {
   name = config.meta.name;
   version = config.meta.version;
@@ -59,5 +70,9 @@ in pkgs.stdenv.mkDerivation {
 
     # Write plugin.json
     cp ${pluginJson} $out/plugin.json
+
+    # Write frontend
+    mkdir -p $out/dist
+    cp ${frontend}/lib/node_modules/${frontendDirName}/build/. -t $out/dist -a
   '';
 }
