@@ -43,11 +43,11 @@ let
     name = config.meta.name;
     version = config.meta.version;
 
-    src = config.frontendPath;
+    src = config.frontendSource;
     npmDepsHash = "sha256-hi9TKcKXhfeceW2iaIIV6HbNxZv72bZ7mhR0K9QS1hI=";
   };
 
-  frontendDirName = builtins.baseNameOf config.frontendPath;
+  frontendDirName = builtins.baseNameOf config.frontendSource;
 
 in pkgs.stdenv.mkDerivation {
   name = config.meta.name;
