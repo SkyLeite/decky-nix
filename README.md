@@ -10,4 +10,12 @@ This is a Flake library for easily building Decky plugins using Nix.
 
 ## Testing
 
-This project includes a demo Python project built with Poetry for testing purposes. Running `nix build .#checks.x86_64-linux.test` should result in a directory named `result` being created that contains a directory named `vendor` containing all the Python dependencies specified in `tests/demo/pyproject.toml` (including the Python interpreter itself, fwiw). In the future it will also include a basic `main.py` file, which should also be built and patched to use such vendored dependencies.
+This project includes a demo Python project built with Poetry for testing purposes. Running `nix build .#checks.x86_64-linux.test` should result in a directory named `result` with the following structure:
+
+```
+default/
+├─ lib/
+├─ vendor/
+main.py
+plugin.json
+```
