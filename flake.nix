@@ -11,19 +11,12 @@
       url = "github:nix-community/poetry2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    demoPlugin.url = "./tests/demo";
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, poetry2nix, demoPlugin }:
+  outputs = { self, nixpkgs, flake-utils, mach-nix, poetry2nix }:
     let pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in {
+    in rec {
       lib = (import ./lib { inherit pkgs poetry2nix; });
-
-      checks.x86_64-linux.test = (import ./tests {
-        inherit pkgs;
-
-        plugin = demoPlugin.plugins.default;
-      });
+      checks.x86_64-linux.default = (import ./tests { inherit pkgs lib; });
     };
 }

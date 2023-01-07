@@ -39,16 +39,12 @@ let
     import lib
   '';
 
-  frontend = pkgs.buildNpmPackage {
+  frontend = pkgs.buildNpmPackage (pkgs.lib.recursiveUpdate config.frontend {
     name = config.meta.name;
     version = config.meta.version;
+  });
 
-    src = config.frontendSource;
-    npmDepsHash = "sha256-hi9TKcKXhfeceW2iaIIV6HbNxZv72bZ7mhR0K9QS1hI=";
-  };
-
-  frontendDirName = builtins.baseNameOf config.frontendSource;
-
+  frontendDirName = builtins.baseNameOf config.frontend.src;
 in pkgs.stdenv.mkDerivation {
   name = config.meta.name;
   version = config.meta.version;
