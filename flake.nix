@@ -16,15 +16,14 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, mach-nix, poetry2nix, demoPlugin }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
-      in rec {
-        lib = (import ./lib { inherit pkgs lib poetry2nix; });
-        checks = flake-utils.lib.flattenTree {
-          test = (import ./tests {
-            inherit pkgs lib;
-            plugin = demoPlugin.plugins.x86_64-linux.default;
-          });
-        };
+    let pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in {
+      lib = (import ./lib { inherit pkgs poetry2nix; });
+
+      checks.x86_64-linux.test = (import ./tests {
+        inherit pkgs;
+
+        plugin = demoPlugin.plugins.default;
       });
+    };
 }

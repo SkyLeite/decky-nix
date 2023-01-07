@@ -1,4 +1,4 @@
-{ config, pkgs, lib, poetry2nix }:
+{ config, pkgs, poetry2nix }:
 let
   pythonPackages =
     pkgs.poetry2nix.mkPoetryPackages { projectDir = config.pythonSource; };
