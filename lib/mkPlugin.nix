@@ -1,12 +1,12 @@
 { config, pkgs, poetry2nix }:
 let
   pythonPackages =
-    pkgs.poetry2nix.mkPoetryPackages { projectDir = config.pythonSource; };
+    pkgs.poetry2nix.mkPoetryPackages { projectDir = config.python.src; };
 
   packages = builtins.concatStringsSep " "
     (map (x: toString x) pythonPackages.poetryPackages);
 
-  pythonSourceDirName = builtins.baseNameOf config.pythonSource;
+  pythonSourceDirName = builtins.baseNameOf config.python.src;
 
   pluginJson = builtins.toFile "input.json" (builtins.toJSON {
     name = config.meta.name;
@@ -60,7 +60,7 @@ in pkgs.stdenv.mkDerivation {
     cp ${packages} -t $out/default/vendor -r
 
     # Copy Python source code and import it on main.py
-    cp ${config.pythonSource}/${pythonSourceDirName}/. -t $out/default/lib/ -a
+    cp ${config.python.src}/${pythonSourceDirName}/. -t $out/default/lib/ -a
 
     printf "${mainPythonFile}" > $out/main.py
 
