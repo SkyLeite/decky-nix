@@ -9,11 +9,11 @@
         "poetry2nix": "poetry2nix_2"
       },
       "locked": {
-        "lastModified": 1673057403,
-        "narHash": "sha256-UcxVwGMV8zeFZmalyViOLfRjXbiW75MWTORDMbkFFm0=",
+        "lastModified": 1673057810,
+        "narHash": "sha256-n6MwyZrm6RuDDyaSJ/Pxb1+SYpbjUh6kcw14VflKIvk=",
         "owner": "SkyLeite",
         "repo": "decky-nix",
-        "rev": "4212ab5d1cd8665e53ec1bc756b241a2fc5ab0cb",
+        "rev": "7328d94fcab55b1211414e3e46a382ea5579c8ba",
         "type": "github"
       },
       "original": {
@@ -50,12 +50,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-FNMm/UcwEBY8fGVom7B/xm2DgjdVxD6UDw8krEFc3Os=",
-        "path": "/nix/store/rk5kisq56icmdn42lzg7ic5dzfy2vyrq-source/tests/demo",
+        "narHash": "sha256-Ci+UVEWtwpvksUwwEAtXOKY5mBJmORscIdv2evaaD5U=",
+        "path": "/nix/store/cf988sdml2mc8vp9d0wg3l67h1gkfdin-source/tests/demo",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/rk5kisq56icmdn42lzg7ic5dzfy2vyrq-source/tests/demo",
+        "path": "/nix/store/cf988sdml2mc8vp9d0wg3l67h1gkfdin-source/tests/demo",
         "type": "path"
       }
     },
