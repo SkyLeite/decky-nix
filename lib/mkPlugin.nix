@@ -30,13 +30,15 @@ let
         import sys
 
         plugin_dir = get_plugin_dir()
-        directories = [["./"], ["lib"], ["vendor"]]
+        directories = [[\"./\"], [\"lib\"], [\"vendor\"], [\"default\"], [\"default/lib\"], [\"default/vendor\"], [\"/usr/lib/python3.10\"]]
         for dir in directories:
             sys.path.append(str(plugin_dir.joinpath(*dir)))
 
     add_plugin_to_path()
 
-    import lib
+    from lib import *
+
+    dir()
   '';
 
   frontend = pkgs.buildNpmPackage (pkgs.lib.recursiveUpdate config.frontend {
@@ -44,7 +46,8 @@ let
     version = config.meta.version;
   });
 
-  frontendDirName = builtins.baseNameOf config.frontend.src;
+  frontendDirName =
+    config.frontend.name or (builtins.baseNameOf config.frontend.src);
 in pkgs.stdenv.mkDerivation {
   name = config.meta.name;
   version = config.meta.version;
@@ -57,7 +60,9 @@ in pkgs.stdenv.mkDerivation {
 
     # Vendor Python packages
     mkdir -p $out/default/vendor
-    cp ${packages} -t $out/default/vendor -r
+
+    find ${packages} -type d -name "site-packages" -exec cp -r {}/. $out/default/vendor \;
+    # cp ${packages}/. -t $out/default/vendor -r
 
     # Copy Python source code and import it on main.py
     cp ${config.python.src}/${pythonSourceDirName}/. -t $out/default/lib/ -a
